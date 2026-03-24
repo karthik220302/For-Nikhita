@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <source src="cherry.mp4" type="video/mp4">
-    <title>......</title>
+    <title>A Special Question...</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
 
@@ -17,6 +16,7 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
+            background-color: #ffb7c5; /* Soft pink fallback color just in case */
         }
 
         body {
@@ -39,7 +39,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: black; /* Black background to hide video */
+            background: rgba(0, 0, 0, 0.5); /* Changed from solid black so the video shows! */
+            backdrop-filter: blur(5px); /* Adds a very cool slight blur to the background */
             color: white;
             display: flex;
             justify-content: center;
@@ -151,22 +152,24 @@
             display: none;
             justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.6); /* Made more transparent so the video is visible at the end */
             color: white;
             font-size: 3rem;
             text-align: center;
             z-index: 3;
+            padding: 20px;
         }
 
         .fullscreen.active {
             display: flex;
+            animation: fadeIn 2s ease-in-out;
         }
     </style>
 </head>
 <body>
 
-    <video autoplay loop muted id="video-background">
-        <source src="cherry.mp4" type="video/mp4">
+    <video autoplay loop muted playsinline id="video-background">
+        <source src="https://karthik220302.github.io/For-Nikhita/Cherry.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
