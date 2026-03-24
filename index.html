@@ -111,7 +111,6 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: 0.3s;
             box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.7);
             font-family: 'Arial', sans-serif;
         }
@@ -122,8 +121,9 @@
         }
 
         #no-btn {
-            position: relative;
-            transition: transform 1s ease, opacity 1s ease; /* Smooth bird-like disappearance */
+            /* Added smooth transitions for top/left movement */
+            transition: left 0.3s ease, top 0.3s ease, transform 1s ease, opacity 1s ease; 
+            z-index: 999; /* Keeps it above everything else when it moves */
         }
 
         .hidden {
@@ -152,7 +152,7 @@
             display: none;
             justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.6); /* Made more transparent so the video is visible at the end */
+            background: rgba(0, 0, 0, 0.6);
             color: white;
             font-size: 3rem;
             text-align: center;
@@ -219,15 +219,25 @@
 
         function moveNo() {
             let noButton = document.getElementById('no-btn');
-            let x = Math.random() * (window.innerWidth - 200); // Random position within width
-            let y = Math.random() * (window.innerHeight - 100); // Random position within height
+            
+            // Switch to fixed positioning so it stays relative to the screen, not the box
+            noButton.style.position = 'fixed';
+            
+            // Calculate screen limits minus the button size (with a 20px safety padding)
+            let maxX = window.innerWidth - noButton.offsetWidth - 20;
+            let maxY = window.innerHeight - noButton.offsetHeight - 20;
+            
+            // Pick random coordinates that stay strictly within the calculated limits
+            let x = Math.max(20, Math.random() * maxX);
+            let y = Math.max(20, Math.random() * maxY);
+            
             noButton.style.left = `${x}px`;
             noButton.style.top = `${y}px`;
         }
 
         function flyAway() {
             const noButton = document.getElementById('no-btn');
-            noButton.classList.add('fly-away'); // Apply fly-away animation
+            noButton.classList.add('fly-away'); // Apply fly-away animation if clicked
         }
     </script>
 
